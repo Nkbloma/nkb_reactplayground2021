@@ -8,7 +8,7 @@ export class AddTodo extends Component {
     
     onSubmit = (e) =>{
         e.preventDefault();
-        this.props.addTodo(this.state.title);
+        this.props.addTodo(this.state.title); //This adds the title on submit.
         this.setState({title: ''});
     }
     //gets the name value instead of just title, 
@@ -45,3 +45,4 @@ AddTodo.propTypes = {
   }
 
 export default AddTodo
+//This creates the form for the todo, this will be useful when adding to the api.

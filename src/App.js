@@ -40,8 +40,8 @@ class App extends Component{
         title,
         completed: false
     })
-      .then(res => this.setState({todos: 
-        [...this.state.todos, res.data]} ));
+      .then(res => this.setState({todos: [...this.state.todos, res.data]})
+      );
   }
   render(){
     return (

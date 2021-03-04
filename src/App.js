@@ -11,7 +11,7 @@ class App extends Component{
   };
   componentDidMount(){
     axios.get('https://s3c1zl14xi.execute-api.us-east-2.amazonaws.com/postOnly/helloworld')
-    .then(res => this.setState({ReturnedMessage: res.data}))
+    .then(res => this.setState({ReturnedMessage: res.data['mongoData']["name"]}))
   }
   //post data to aws
   sendMessage = (sent_name) => {
@@ -29,7 +29,7 @@ class App extends Component{
       <div>
         <Header/>
         <HelloForm sendMessage={this.sendMessage}/>
-        <p>{this.state.ReturnedMessage['message']}</p>
+        <p>{this.state.ReturnedMessage['first']}</p>
       </div>
     )
   }

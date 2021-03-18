@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
 import HelloForm from './components/HelloForm';
-import Header from './components/layout/Header.js';
+import Base from './components/layout/Base.js';
 
 class App extends Component{
 
@@ -27,7 +27,7 @@ class App extends Component{
   render(){
     return (
       <div>
-        <Header/>
+        <Base/>
         <HelloForm sendMessage={this.sendMessage}/>
         <p>{this.state.ReturnedMessage['first']}</p>
       </div>

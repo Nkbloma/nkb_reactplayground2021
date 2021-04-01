@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
-import HelloForm from './components/HelloForm';
-import Base from './components/layout/Base.js';
+//import HelloForm from './components/HelloForm';
+import Dashboard from './components/pages/DashboardPage.js';
+import FoodJournal from './components/pages/FoodJournalPage.js';
+import AddFood from './components/pages/AddFoodPage.js';
+import Statistics from './components/pages/StatsPage.js';
+import Notifications from './components/pages/NotificationsPage.js';
+import Settings from './components/pages/SettingsPage.js';
+import {BrowserRouter, Route} from 'react-router-dom'
 
 class App extends Component{
 
@@ -26,11 +32,14 @@ class App extends Component{
   }
   render(){
     return (
-      <div>
-        <Base/>
-        <HelloForm sendMessage={this.sendMessage}/>
-        <p>{this.state.ReturnedMessage['first']}</p>
-      </div>
+      <BrowserRouter>
+        <Route exact path={["/", "/dashboard"]} component={Dashboard}/>
+        <Route path='/stats' component={Statistics}/>
+        <Route path='/foodjournal' component={FoodJournal}/>
+        <Route path='/addfood' component={AddFood}/>
+        <Route path='/notifications' component={Notifications}/>
+        <Route path='/settings' component={Settings}/>
+      </BrowserRouter>
     )
   }
 }

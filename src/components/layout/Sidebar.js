@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Sidebar(){
 	return(
@@ -11,31 +12,42 @@ function Sidebar(){
 			</div>
 			<nav class="NavigationList" style={NavigationListStyle}>
 				<ul style={NavigationListUlStyle}>
-						<li style={NavigationListLiStyle("url(Icons/landmark-solid.svg")}>
-							<span style={NavigationListText}>Dashboard</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-						</li>
-						<li style={NavigationListLiStyle("url(Icons/chart-bar-regular.svg)")}>
-							<span style={NavigationListText}>Stats</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-						</li>
-						<li style={NavigationListLiStyle("url(Icons/book-solid.svg)")}>
-							<span style={NavigationListText}>Food List</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-						</li>
-						<li style={NavigationListLiStyle("url(Icons/hamburger-solid.svg)")}>
-							<span style={NavigationListText}>Add Food</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-						</li>
-						<li style={NavigationListLiStyle("url(Icons/bell-solid.svg)")}>
-							<span style={NavigationListText}>Notifications</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-						</li>
-						<li style={NavigationListLiStyle("url(Icons/cog-solid.svg)")}>
-							<span style={NavigationListText}>Settings</span>
-							<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
-
-						</li>
+						<Link to={{pathname: '/dashboard'}}> 
+							<li style={NavigationListLiStyle("url(Icons/landmark-solid.svg")}>
+								<span style={NavigationListText}>Dashboard</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
+						<Link to={{pathname: '/stats'}}>
+							<li style={NavigationListLiStyle("url(Icons/chart-bar-regular.svg)")}>
+								<span style={NavigationListText}>Stats</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
+						<Link to={{pathname: 'foodjournal'}}>
+							<li style={NavigationListLiStyle("url(Icons/book-solid.svg)")}>
+								<span style={NavigationListText}>Food Journal</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
+						<Link to={{pathname: '/addfood'}}>
+							<li style={NavigationListLiStyle("url(Icons/hamburger-solid.svg)")}>
+								<span style={NavigationListText}>Add Food</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
+						<Link to={{pathname: '/notifications'}}>
+							<li style={NavigationListLiStyle("url(Icons/bell-solid.svg)")}>
+								<span style={NavigationListText}>Notifications</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
+						<Link to={{pathname: '/settings'}}>
+							<li style={NavigationListLiStyle("url(Icons/cog-solid.svg)")}>
+								<span style={NavigationListText}>Settings</span>
+								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+							</li>
+						</Link>
 					</ul>
 				</nav>
         </div>
@@ -99,15 +111,17 @@ const NavigationListStyle = {
     flexGrow: '3',
     background: 'none',
     alignContent: 'center',
-    justifySelf: 'left'
+    justifySelf: 'left',
 }
 const NavigationListText = {
 	flex: "1",
-	width:"100px"
+	width:"100px",
+	color: 'rgba(232, 232, 232, 0.8)'
 }
 const NavigationListIcon ={
 	flex: "0.1",
-	paddingTop:"5px"
+	paddingTop:"5px",
+	color: 'rgba(232, 232, 232, 0.8)'
   }
 function NavigationListLiStyle(bg_image) {
     return({

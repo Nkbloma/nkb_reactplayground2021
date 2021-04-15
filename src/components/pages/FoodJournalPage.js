@@ -53,7 +53,7 @@ export class FoodJournal extends Component {
                             type="submit"
                             value="Submit"
                             className="btn"
-                            style={{flex: '0.1', marginLeft:'15px'}}
+                            style={{flex: '0.1', marginLeft:'15px', backgroundColor:'gray'}}
                         />
                 </form>
                 <div class="JournalArea" style={JournalArea_Style}>

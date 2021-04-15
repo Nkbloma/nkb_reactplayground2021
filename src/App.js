@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
-//import HelloForm from './components/HelloForm';
 import Dashboard from './components/pages/DashboardPage.js';
 import FoodJournal from './components/pages/FoodJournalPage.js';
 import AddFood from './components/pages/AddFoodPage.js';
@@ -9,6 +8,7 @@ import Statistics from './components/pages/StatsPage.js';
 import Notifications from './components/pages/NotificationsPage.js';
 import Settings from './components/pages/SettingsPage.js';
 import {BrowserRouter, Route} from 'react-router-dom'
+//import HelloForm from './components/functions/HelloForm';
 
 class App extends Component{
 
@@ -30,6 +30,16 @@ class App extends Component{
       console.log(res);
     })
   }
+  /*foodNameQuery = (sent_foodName) => {
+    axios.post(`https://s3c1zl14xi.execute-api.us-east-2.amazonaws.com/postOnly/helloworld?`,{
+      foodName: sent_foodName,
+    })
+    .then(res =>{
+      this.setState({ReturnedFood: res.data})
+      console.log("Response:");
+      console.log(res);
+    })
+  }*/
   render(){
     return (
       <BrowserRouter>

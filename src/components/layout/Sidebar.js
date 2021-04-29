@@ -3,49 +3,49 @@ import {Link} from 'react-router-dom';
 
 function Sidebar(){
 	return(
-       <div class="shadow-sm rounded box Sidebar-Flex-Stack" style={SidebarFlexStyle}>
-			<img class="CompanySymbol" src="Icons/SiteIcon.png" alt="NotFound" style={CompanySymbolStyle}/>
-			<div class="UserProfile" style={UserProfileStyle}>
-				<img class="Avatarpic" src="Icons/ProfileAvatar.png" alt="Not Found" style={AvatarPicStyle}></img>
+       <div className="shadow-sm rounded box Sidebar-Flex-Stack" style={SidebarFlexStyle}>
+			<img className="CompanySymbol" src="Icons/SiteIcon.png" alt="NotFound" style={CompanySymbolStyle}/>
+			<div className="UserProfile" style={UserProfileStyle}>
+				<img className="Avatarpic" src="Icons/ProfileAvatar.png" alt="Not Found" style={AvatarPicStyle}></img>
 				<span style={UserProfileSpanStyle}>N.K.B</span>
-				<i style={UserProfileIconStyle} class="fas fa-arrow-right"></i>
+				<i style={UserProfileIconStyle} className="fas fa-arrow-right"></i>
 			</div>
-			<nav class="NavigationList" style={NavigationListStyle}>
+			<nav className="NavigationList" style={NavigationListStyle}>
 				<ul style={NavigationListUlStyle}>
 						<Link to={{pathname: '/dashboard'}}> 
-							<li style={NavigationListLiStyle("url(Icons/landmark-solid.svg")}>
+							<li key="dashboard" style={NavigationListLiStyle("url(Icons/landmark-solid.svg")}>
 								<span style={NavigationListText}>Dashboard</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 						<Link to={{pathname: '/stats'}}>
-							<li style={NavigationListLiStyle("url(Icons/chart-bar-regular.svg)")}>
+							<li key="stats" style={NavigationListLiStyle("url(Icons/chart-bar-regular.svg)")}>
 								<span style={NavigationListText}>Stats</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 						<Link to={{pathname: 'foodjournal'}}>
-							<li style={NavigationListLiStyle("url(Icons/book-solid.svg)")}>
+							<li key="foodjournal" style={NavigationListLiStyle("url(Icons/book-solid.svg)")}>
 								<span style={NavigationListText}>Food Journal</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 						<Link to={{pathname: '/addfood'}}>
-							<li style={NavigationListLiStyle("url(Icons/hamburger-solid.svg)")}>
+							<li key="addfood" style={NavigationListLiStyle("url(Icons/hamburger-solid.svg)")}>
 								<span style={NavigationListText}>Add Food</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 						<Link to={{pathname: '/notifications'}}>
-							<li style={NavigationListLiStyle("url(Icons/bell-solid.svg)")}>
+							<li key="notifications" style={NavigationListLiStyle("url(Icons/bell-solid.svg)")}>
 								<span style={NavigationListText}>Notifications</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 						<Link to={{pathname: '/settings'}}>
-							<li style={NavigationListLiStyle("url(Icons/cog-solid.svg)")}>
+							<li key="settings" style={NavigationListLiStyle("url(Icons/cog-solid.svg)")}>
 								<span style={NavigationListText}>Settings</span>
-								<i style={NavigationListIcon} class="fas fa-arrow-right"></i>
+								<i style={NavigationListIcon} className="fas fa-arrow-right"></i>
 							</li>
 						</Link>
 					</ul>

@@ -1,23 +1,24 @@
 import React, {Component} from 'react';
 
 class Header_Content extends Component{
+
     props={
         PageTitle: "",
         MainContent: ""
     }
     render() {
         return (
-                <div class="HeaderContent-Flex-Stack" style={HeaderContentFlexStyle}>
-                    <span class="box header" style={HeaderStyle}>
-                        <span class="currentPage-Title" style={currentPageTitle}>
+                <div className="HeaderContent-Flex-Stack" style={HeaderContentFlexStyle}>
+                    <span className="box header" style={HeaderStyle}>
+                        <span className="currentPage-Title" style={currentPageTitle}>
                             {this.props.PageTitle}
                         </span>
                         <span style={{marginRight:"20px", flexGrow: "0.01"}}>
-                            <i class="far fa-bell" style={{paddingRight:"20px"}}></i>
-                            <img class="HeaderAvatar" src="Icons/ProfileAvatar.png" style={{width:"40px", height:"40px"}} alt='NoPics'/>
+                            <i className="far fa-bell" style={{paddingRight:"20px"}}></i>
+                            <img className="HeaderAvatar" src="Icons/ProfileAvatar.png" style={{width:"40px", height:"40px"}} alt='NoPics'/>
                         </span>
                     </span>
-                    <div class="Main-Content" style={MainContentStyle}>
+                    <div className="Main-Content" style={MainContentStyle}>
                         {this.props.MainContent}
                     </div>
                 </div>

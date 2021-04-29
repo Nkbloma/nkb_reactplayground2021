@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/LambdaFunction/node_modules
 
 # testing
 /coverage

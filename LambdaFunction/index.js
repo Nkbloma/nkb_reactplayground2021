@@ -1,29 +1,37 @@
 "use strict"; //Formats Node.JS for improved performance.
 const MongoClient = require('mongodb').MongoClient;
-async function connectToMongo() {
+
+exports.handler = async (event, callback, context) => {
+  var foodName = event.foodName;
+  var foodQuery = event.foodQuery;
+  let query={};
+  query[foodName] = foodQuery;
   const uri = process.env.atlasURI;
   const client = await MongoClient.connect(uri,  { useNewUrlParser: true, useUnifiedTopology: true });
-  const collection = client.db("gettingStarted").collection("people");
-  const items = await collection.findOne({});
-  client.close();
-  return items;
-}
+  const collection = await client.db("4500_FoodJournal").collection("UserFoodsEntered");
 
-exports.handler = async (event, context, callback) => {
-  let db_results = await connectToMongo()
-  console.log(db_results);
+  const items = await collection.findOne({[foodQuery]:foodName});
+  client.close();
+  let db_results = "";
+  
+  if(items)
+    db_results = items[foodName];
+  else
+    db_results = "null"
+    
+  console.log(items);
   let responseBody = {
       mongoData: db_results,
       response_data: event
-    }
-    let response = {
-        statusCode: 200,
-        headers: {
-            "Access-Control-Allow-Headers" : "Content-Type",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
-        },
-        body: JSON.stringify(responseBody)
-    };
+  }
+  let response = {
+      statusCode: 200,
+      headers: {
+          "Access-Control-Allow-Headers" : "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+      },
+      body: responseBody
+  };
     return response;
 };

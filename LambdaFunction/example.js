@@ -1,3 +1,4 @@
+exports.handler = async (event, callback, context) => {
     let name='user';
     let responseCode = 200;
     
@@ -53,3 +54,4 @@
     */
     
     return response;
+}

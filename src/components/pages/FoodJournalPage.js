@@ -1,52 +1,91 @@
 import React, {Component} from 'react';
 import HeaderContent from '../layout/Header_Content.js';
 import Sidebar from '../layout/Sidebar.js';
+import axios from 'axios';
 //import HelloForm from '../functions/HelloForm'
 
 let today= new Date()
 let date= parseInt(today.getMonth()+1) + "-"+ today.getDate() +"-"+today.getFullYear()
 let title= `Food Journal ${date}`
 export class FoodJournal extends Component {
-    state={
 
+    state={
+        journalDate: date,
+        journalEntries: [
+        ],
+        typedValue: '',
+        ReturnedFoodEntry: [],
+        Calories: 0,
+        Protein: 0,
+        Carbs: 0,
+        Fat: 0,
+        flashMessage: false
     }
     onSubmit = (e) =>{
         e.preventDefault();
-        console.log(this.state.nam);
-        this.props.sendMessage(this.state.nam); //This adds the title on submit.
-        this.setState({nam: ''});   //using add function from App.js given by prop.
+        console.log(this.state.typedValue);
+        this.sendFoodQuery(this.state.typedValue);
+        this.setState({typedValue: ''});   //using add function from App.js given by prop.
     }
+    sendFoodQuery = (sent_foodName) => {
+        axios.post(`https://v5ygmhb89a.execute-api.us-east-2.amazonaws.com/Test`,{
+        foodName: sent_foodName,
+        foodQuery: `${sent_foodName}.Name`
+    })
+    .then(res =>{
+      let bod = res.data["body"]["mongoData"];
+      if(bod === "null"){
+          this.setState({flashMessage: true})
+      }
+      else{
+        let newArray = [[bod["Name"], bod["Calories"], bod["Protein"], bod["Carbs"], bod["Fat"]]]
+        this.setState({
+            journalEntries:
+                [...this.state.journalEntries,
+                ...newArray 
+                ] 
+            })
+        this.setState({
+            Calories: Math.round(this.state.Calories += bod["Calories"]),
+            Protein: Math.round(this.state.Protein +=bod["Protein"]),
+            Carbs: Math.round(this.state.Carbs +=bod["Carbs"]),
+            Fat: Math.round(this.state.Fat +=bod["Fat"]),
+            flashMessage: false
+        })
+        }
+    })
+  }
     onInputChange = (e) => this.setState({ 
         [e.target.name]: e.target.value }
     );
     ContentHTML = () =>{
         return(
-            <div class="MainContent_Flex" style={MainContent_Flex}>
-                <div class="TopLayerContent-Flex" style={TopLayerContentStyle}>
-                    <div style = {topCaloriesStyle} class="shadow rounded topCalories Today-Calories">
+            <div className="MainContent_Flex" style={MainContent_Flex}>
+                <div className="TopLayerContent-Flex" style={TopLayerContentStyle}>
+                    <div style = {topCaloriesStyle} className="shadow rounded topCalories Today-Calories">
                         <span>Calories</span>
-                        <h4>250.10</h4>
+                        <h4>{this.state.Calories}</h4>
                     </div>
-                    <div style = {topCaloriesStyle} class="shadow rounded topCalories Week-Calories">
+                    <div style = {topCaloriesStyle} className="shadow rounded topCalories Week-Calories">
                         <span>Protein</span>
-                        <h4>250.10</h4>
+                        <h4>{this.state.Protein}</h4>
                     </div>
-                    <div style = {topCaloriesStyle} class="shadow rounded topCalories Month-Calories">
+                    <div style = {topCaloriesStyle} className="shadow rounded topCalories Month-Calories">
                         <span>Carbs</span>
-                        <h4>250.10</h4>
+                        <h4>{this.state.Carbs}</h4>
                     </div>
-                    <div style = {topCaloriesStyle} class="shadow rounded topCalories Year-Calories">
+                    <div style = {topCaloriesStyle} className="shadow rounded topCalories Year-Calories">
                         <span>Fat</span>
-                        <h4>250.10</h4>
+                        <h4>{this.state.Fat}</h4>
                     </div>
                 </div>
                 <form onSubmit={this.onSubmit} style={FormStyling}>
                         <input
                             type="text" 
-                            name="nam"
+                            name="typedValue"
                             style= {{ flex: '1', padding: '5px', fontStyle: 'italic'}} 
                             placeholder="Food name..."
-                            value={this.state.nam}
+                            value={this.state.typedValue}
                             onChange={this.onInputChange}
                         />
                         <input
@@ -56,8 +95,13 @@ export class FoodJournal extends Component {
                             style={{flex: '0.1', marginLeft:'15px', backgroundColor:'gray'}}
                         />
                 </form>
-                <div class="JournalArea" style={JournalArea_Style}>
-                    <div class="TopJournalLabels" style={TopJournalLabels_Style}>
+                {this.state.flashMessage &&
+                    <p style={{color: 'red', fontSize:'20px', fontWeight: 'bold', fontFamily:'Roboto',}}>
+                            Food item doesn't exist
+                    </p>
+                }
+                <div className="JournalArea" style={JournalArea_Style}>
+                    <div className="TopJournalLabels" style={TopJournalLabels_Style}>
                         <span style={JournalLabel_Style}>
                             Food Name
                         </span>
@@ -74,31 +118,29 @@ export class FoodJournal extends Component {
                             Fat
                         </span>
                     </div>
-                    <div class="JournalEntriesArea" style={JournalEntriesArea_Style}>
-                        <div style={FullEntry_Style}>
-                            <span style={SingleEntry_Style}>Almonds</span>
-                            <span style={SingleEntry_Style}>2231</span>
-                            <span style={SingleEntry_Style}>233</span>
-                            <span style={SingleEntry_Style}>57</span>
-                            <span style={SingleEntry_Style}>13</span>
-                        </div>
-                        <div style={FullEntry_Style}>
-                            <span style={SingleEntry_Style}>Almonds</span>
-                            <span style={SingleEntry_Style}>2231</span>
-                            <span style={SingleEntry_Style}>233</span>
-                            <span style={SingleEntry_Style}>57</span>
-                            <span style={SingleEntry_Style}>13</span>
-                        </div>
+                    <div className="JournalEntriesArea" style={JournalEntriesArea_Style}>
+                        {this.state.journalEntries.map((fullEntry) =>(
+                            <div style={FullEntry_Style}>
+                                <span style={SingleEntry_Style} key="EntryName">{fullEntry[0]}</span>
+                                <span style={SingleEntry_Style} key="EntryCalories">{fullEntry[1]}</span>
+                                <span style={SingleEntry_Style} key="EntryProtein">{fullEntry[2]}</span>
+                                <span style={SingleEntry_Style} key="EntryCarbs">{fullEntry[3]}</span>
+                                <span style={SingleEntry_Style} key="EntryFat">{fullEntry[4]}</span>
+                            </div>  
+                            )
+                        )}
                     </div>
                 </div>
             </div>
         )
     }
+    
     render(){
         return(
-            <div class="General-Flex-Wrapper" style={generalStyle}>
+            <div className="General-Flex-Wrapper" style={generalStyle}>
                 <Sidebar/>
                 <HeaderContent MainContent={this.ContentHTML()} PageTitle={title}/>
+                
             </div>
         )
     }

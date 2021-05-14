@@ -1,46 +1,105 @@
-import React from 'react';
+import React, { Component } from 'react';
 import HeaderContent from '../layout/Header_Content.js';
 import Sidebar from '../layout/Sidebar.js';
 
+let today=new Date();
+let date=parseInt(today.getMonth()+1) + "-"+ today.getDate() +"-"+today.getFullYear();
+const title=`AddFood ${date}`;
 
-function ContentHTML(){
-    return (
-        <div class="TopLayerContent-Flex" style={TopLayerContentStyle}>
-            <div style = {topCaloriesStyle} class="shadow rounded topCalories Today-Calories">
-                <span>Today</span>
-                <h4>54545.10</h4>
-            </div>
-            <div style = {topCaloriesStyle} class="shadow rounded topCalories Week-Calories">
-                <span>Week</span>
-                <h4>250.10</h4>
-            </div>
-            <div style = {topCaloriesStyle} class="shadow rounded topCalories Month-Calories">
-                <span>Month</span>
-                <h4>250.10</h4>
-            </div>
-            <div style = {topCaloriesStyle} class="shadow rounded topCalories Year-Calories">
-                <span>Year</span>
-                <h4>250.10</h4>
-            </div>
-        </div>
-    )
-}
+export class AddFood extends Component{
 
-function AddFood() {
-    let today=new Date();
-    let date=parseInt(today.getMonth()+1) + "-"+ today.getDate() +"-"+today.getFullYear();
-    const title=`AddFood ${date}`;
-    return(
-        <div class="General-Flex-Wrapper" style={generalStyle}>
-            <Sidebar/>
-            <HeaderContent MainContent={ContentHTML()} PageTitle={title}/>
-        </div>
-    )
+    state = {
+        typedVaue: ''
+    }
+    ContentHTML = () => {
+        return (
+            <div>
+                <h1>AddFoodForm</h1>
+                <form style={FormStyling}>
+                            <label for="typedFoodName" style={{margin: '10px', marginTop: '15px', fontSize:'20px'}}>
+                                FoodName
+                            </label>
+                            <input
+                                type="text" 
+                                name="typedFood"
+                                style= {{ flex: '1', padding: '5px', margin:'10px', fontStyle: 'italic'}} 
+                                placeholder="Food name..."
+                                value={this.state.typedValue}
+                                onChange={this.onInputChange}
+                            />
+                            <label for="typedCalories" style={{margin: '10px', marginTop: '15px', fontSize:'20px'}}>
+                                Calories
+                            </label>
+                            <input
+                                type="text" 
+                                name="typedCalories"
+                                style= {{ flex: '1', padding: '5px', margin:'10px', fontStyle: 'italic'}} 
+                                placeholder="Calories..."
+                                value={this.state.typedValue}
+                                onChange={this.onInputChange}
+                            />
+                            <label for="typedProtein" style={{margin: '10px', marginTop: '15px', fontSize:'20px'}}>
+                                Protein
+                            </label>
+                            <input
+                                type="text" 
+                                name="typedProtein"
+                                style= {{ flex: '1', padding: '5px', margin:'10px', fontStyle: 'italic'}} 
+                                placeholder="Protein..."
+                                value={this.state.typedValue}
+                                onChange={this.onInputChange}
+                            />
+                            <label for="typedCarbs" style={{margin: '10px', marginTop: '15px', fontSize:'20px'}}>
+                                Carbs
+                            </label>
+                            <input
+                                type="text" 
+                                name="typedCarbs"
+                                style= {{ flex: '1', padding: '5px', margin:'10px', fontStyle: 'italic'}} 
+                                placeholder="Carbs..."
+                                value={this.state.typedValue}
+                                onChange={this.onInputChange}
+                            />
+                            <label for="typedProtein" style={{margin: '10px', marginTop: '15px', fontSize:'20px'}}>
+                                Fat
+                            </label>
+                            <input
+                                type="text" 
+                                name="typedFat"
+                                style= {{ flex: '1', padding: '5px', margin:'10px', fontStyle: 'italic'}} 
+                                placeholder="Fat..."
+                                value={this.state.typedValue}
+                                onChange={this.onInputChange}
+                            />
+                            <input
+                                type="submit"
+                                value="Submit"
+                                className="btn"
+                                style={{flex: '0.5', width: '200px', margin:'10px', backgroundColor:'gray'}}
+                            />
+                    </form>
+            </div>
+        )
+    }
+
+    render(){
+        return(
+            <div class="General-Flex-Wrapper" style={generalStyle}>
+                <Sidebar/>
+                <HeaderContent MainContent={this.ContentHTML()} PageTitle={title}/>
+            </div>
+        )
+    }
 }
 
 const generalStyle = {
   display: 'flex',
   backgroundColor: '#e5e4e2'
+}
+const FormStyling = {
+    display: 'flex',
+    flexFlow: 'column',
+    paddingTop: '15px'
 }
 const TopLayerContentStyle = {
     padding:"15px",
